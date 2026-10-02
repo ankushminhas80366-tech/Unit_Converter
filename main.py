@@ -1,7 +1,15 @@
 """
 Simple command-line unit converter.
 Supports length (km <-> miles), weight (kg <-> pounds), and temperature (C <-> F).
+
+Each converter prints a small menu, reads a choice, asks for a value, and prints the result.
+Factors used:
+    1 km = 0.621371 miles
+    1 kg = 2.20462 pounds
+    F = C * 9/5 + 32
+    C = (F - 32) * 5/9
 """
+
 
 def convert_length():
     """Prompt the user and convert between kilometers and miles."""
@@ -9,22 +17,23 @@ def convert_length():
     print("----Length Converter----")
     print("1: For Km to Miles")
     print("2: For Miles to Km")
-    # Menu choice for which length conversion to run
+    # Menu choice is kept as a string so it can be compared to "1" and "2".
     input_=input("Select option from above 2: ")
 
     if input_=="1":
-        # Convert kilometers to miles using the standard factor
+        # Convert kilometers to miles using the standard factor.
         km=float(input("Enter Kilometers: "))
         miles=km * 0.621371
         print(f"{km} km = {miles} miles")
 
     elif input_=="2":
-        # Convert miles to kilometers (inverse of the factor above)
+        # Convert miles to kilometers (divide by the same factor).
         miles=float(input("Enter Miles: "))
         km=miles/0.621371
         print(f"{miles} Miles = {km} Km")
 
     else:
+        # Anything other than "1" or "2" is rejected.
         print("Invalid Input:")
 
 
@@ -34,17 +43,19 @@ def convert_weight():
     print("----Weight Converter----")
     print("1: For Kilograms to Pounds:")
     print("2: For Pounds to Kilograms:")
-    # Menu choice for which weight conversion to run
+    # Menu choice for which weight conversion to run.
     input_=input("Select options from above 2: ")
 
     if input_=="1":
-        # Convert kilograms to pounds
+        # Convert kilograms to pounds.
         Kilo=float(input("Enter Kilograms: "))
         Pounds=Kilo *  2.20462
         print(f"{Kilo} Kilograms = {Pounds} Pounds")
 
     elif input_=="3":
-        # Convert pounds to kilograms
+        # Pounds to kilograms. Note: the menu says option 2, but this branch
+        # only runs when the user types "3", so option 2 currently falls through
+        # to "Invalid Input".
         pounds=float(input("Enter Pounds: "))
         kilo=pounds/2.20462
         print(f"{pounds} Pounds = {kilo} Kilograms")
@@ -58,7 +69,8 @@ def convert_temprature():
     print("----Temprature Converter----")
     print("1: For Celsius to Fahrenhiet")
     print("2: For Fahrenheit to Celsius")
-    # Menu choice for which temperature conversion to run
+    # Menu choice is read as a float, then compared to the strings "1" and "2".
+    # A float never equals those strings, so both branches are currently unreachable.
     input_=float(input("select options from above 2: "))
 
     if input_=="1":
@@ -83,7 +95,7 @@ def main():
     print("1 : For Convert Length:")
     print("2 : For Convert Weight:")
     print("3 : For Convert Temprature:")
-    # Top-level menu: length, weight, or temperature
+    # Top-level menu: length, weight, or temperature.
     choice=input("Select options from above 3: ")
     if choice=="1":
         convert_length()
@@ -95,6 +107,6 @@ def main():
         print("Invalid Input:")
 
 
-# Run the program only when this file is executed directly
+# Run the program only when this file is executed directly, not when imported.
 if __name__=="__main__":
     main()
